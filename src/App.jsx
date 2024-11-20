@@ -26,7 +26,7 @@ const onAdd=(newStudent)=>{
 const deleteStudent=async (id)=>{
   try{
     const response=await axios.delete(`http://127.0.0.1:8000/student/${id}/delete`)
-    if (response.status==200){
+    if (response.status==204){
       setstudents((students)=>students.filter((student)=>student.id !==id))
     }
   }
@@ -37,12 +37,17 @@ const deleteStudent=async (id)=>{
   }
 }
 const editStudent=async(id,updateStudent)=>{
-  trt{
-    const response=await axios.put(`$(id/update)`,updateStudent)
-    if(response.status==200){
-      setstudents{(students)=>students.map((student))=>student.id==id ?{...student,...}}
-    }
-  }
+  try{
+    const response=await axios.put(`http://127.0.0.1:8000/student/${id}update)`,updateStudent)
+    if(response.status==200)
+      setstudents((students=>
+    students.map((student=>student.id==id ? {...student,...updateStudent}:student))
+      ))
+  
+}
+catch(error){
+  console.error('error update students',error)
+}
 }
 useEffect(()=>{
   fetchstudents()
@@ -51,7 +56,7 @@ useEffect(()=>{
   return (
    <div>
     <Studentform onAdd={onAdd}></Studentform>
-    <Studentlist students={students} onDeleteStudent={deleteStudent} oneditStudent={editStudent}></Studentlist>
+    <Studentlist students={students} onDeleteStudent={deleteStudent} onEditStudent={editStudent}></Studentlist>
    </div>
   )
 }

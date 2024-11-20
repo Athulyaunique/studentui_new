@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 
 
-export default function Studentform() {
+ function Studentform({onAdd}) {
     const[name,setName]=useState('')
     const[age,setAge]=useState('')
     const[email,setEmail]=useState('')
@@ -39,3 +39,4 @@ export default function Studentform() {
 
   )
 }
+export default Studentform

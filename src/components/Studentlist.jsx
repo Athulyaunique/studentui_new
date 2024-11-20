@@ -5,13 +5,21 @@ function Studentlist({students,onDeleteStudent,onEditStudent}) {
     const[editid,seteditid]=useState(null)
     const[editStudent,seteditstudent]=useState({name:'',email:'',age:''})
 
-    const handleEditclick=(student)=>{
+    const onHandleeditclick=(student)=>{
         seteditid(student.id)
         seteditstudent({name:student.name,email:student.email,age:student.age})
 
     }
 
-    const handleCancel
+    const handlecancel=()=>{
+        seteditstudent({name:'',age:'',email:''})
+        seteditid(null)
+    }
+
+    const handleSave=()=>{
+        oneditStudent(editid,editStudent)
+        seteditid(null)
+    }
 
 
   return (
@@ -22,11 +30,11 @@ function Studentlist({students,onDeleteStudent,onEditStudent}) {
         <li key={student.id}>
             {editid==student.id} ? (
                 <div>
-                    <input type='text' value={{editStudent.name} onChange={(e)=>seteditstudent({...editStudent,name:e.target.value})}/>
-                   <input type='email' value={{editStudent.email} onChange={(e)=>seteditstudent({...editStudent,email:e.target.value})}/>
-                   <input type='number' value={{editStudent.age} onChange={(e)=>seteditstudent({...editStudent,age:e.target.value})}/>
-                   <button>Save</button>
-                   <button>Cancel</button>
+                    <input type='text' value={editStudent.name} onChange={(e)=>seteditstudent({...editStudent,name:e.target.value})}/>
+                   <input type='email' value={editStudent.email} onChange={(e)=>seteditstudent({...editStudent,email:e.target.value})}/>
+                   <input type='number' value={editStudent.age} onChange={(e)=>seteditstudent({...editStudent,age:e.target.value})}/>
+                   <button onClick={handlecancel}>Cancel</button>
+                   <button onClick={handleSave}>Save</button>
 
 
                 </div>
